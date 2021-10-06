@@ -6,10 +6,17 @@ import {AddArea} from './components/AddArea';
 
 const App = () => {
 
-  const[list, setList] = useState<Item[]>([
-    {id:1, name: 'Comprar pão na padaria', done: false},
-    {id:2, name: 'Comprar bolo na padaria', done: true},
-  ]);
+  const[list, setList] = useState<Item[]>([]);
+
+  const hendleAddTask = (taskName: string) => {
+    let newList = [... list];
+    newList.push({
+      id: list.length + 1,
+      name: taskName,
+      done: false,
+    });
+    setList(newList)
+  };
 
   return (
     <C.Container>
@@ -18,7 +25,7 @@ const App = () => {
 
       {/*Área de adicionar nova tarefa*/}
 
-      <AddArea></AddArea>
+      <AddArea onEnter= {hendleAddTask} />
 
        {/*Lista de tarefas*/}
        {list.map((item, index) => (
